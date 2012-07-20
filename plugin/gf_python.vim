@@ -60,7 +60,12 @@ def python_goto_file():
         return
 
     # Convert .pyc and .pyo to .py
-    gf = md.__file__.rstrip('co')
+    try:
+        gf = md.__file__.rstrip('co')
+    except AttributeError:
+        print >>sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,)
+        return
+
     if os.path.isfile(gf):
         gf = gf.replace(' ', '\\ ')
         vim.command('split %s' % (gf,))
