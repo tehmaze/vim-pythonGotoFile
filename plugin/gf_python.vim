@@ -26,6 +26,10 @@
 " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 " SOFTWARE.
 
+" Version check
+if v:version < 700
+    finish
+endif
 
 " Load once
 if exists("g:loaded_python_goto_file")
@@ -33,8 +37,6 @@ if exists("g:loaded_python_goto_file")
 else
     let g:loaded_python_goto_file = 1
 endif
-
-
 
 if has("python")
     " `gf` jumps to the filename under the cursor.  Point at an import statement
@@ -65,3 +67,6 @@ def python_goto_file():
 
 EOF
     map gf :python python_goto_file()<cr>
+endif
+
+" vim:ft=vim:fdm=marker
