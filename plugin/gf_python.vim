@@ -44,6 +44,7 @@ if has("python")
     python << EOF
 import os
 import sys
+import types
 import vim
 
 # Make sure we search in current directory first
@@ -52,9 +53,21 @@ sys.path.insert(0, os.getcwd())
 def python_goto_file():
     cw = vim.eval('expand("<cfile>")')
     try:
-        md = __import__(cw)
+        try:
+            md = __import__(cw)
+        except ImportError:
+            if '.' in cw:
+                md = __import__(cw.rsplit('.', 1)[0])
+            else:
+                raise
+
         for m in cw.split('.')[1:]:
-            md = getattr(md, m)
+            nd = getattr(md, m)
+            if type(nd) == types.ModuleType:
+                md = nd
+            else:
+                break
+
     except ImportError, e:
         print >>sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e))
         return
