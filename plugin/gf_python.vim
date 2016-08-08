@@ -41,7 +41,7 @@ endif
 if has("python3")
     " `gf` jumps to the filename under the cursor.  Point at an import statement
     " and jump to it!
-    python << EOF
+    python3 << EOF
 import os
 import sys
 import types
@@ -84,7 +84,7 @@ def python_goto_file():
         vim.command('vsplit %s' % (gf,))
 
 EOF
-    map gf :python python_goto_file()<cr>
+    map gf :python3 python_goto_file()<cr>
 endif
 
 " vim:ft=vim:fdm=marker
