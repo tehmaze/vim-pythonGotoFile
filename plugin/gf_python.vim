@@ -81,7 +81,7 @@ def python_goto_file():
 
     if os.path.isfile(gf):
         gf = gf.replace(' ', '\\ ')
-        vim.command('split %s' % (gf,))
+        vim.command('vsplit %s' % (gf,))
 
 EOF
     map gf :python python_goto_file()<cr>
