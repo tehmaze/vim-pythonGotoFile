@@ -38,7 +38,7 @@ else
     let g:loaded_python_goto_file = 1
 endif
 
-if has("python")
+if has("python3")
     " `gf` jumps to the filename under the cursor.  Point at an import statement
     " and jump to it!
     python << EOF
