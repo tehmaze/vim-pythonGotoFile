@@ -41,7 +41,7 @@ endif
 if has("python3")
     " `gf` jumps to the filename under the cursor.  Point at an import statement
     " and jump to it!
-    python3 << EOF
+    python << EOF
 import os
 import sys
 import types
