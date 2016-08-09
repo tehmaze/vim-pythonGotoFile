@@ -38,10 +38,14 @@ else
     let g:loaded_python_goto_file = 1
 endif
 
-if has("python")
+if has("python3")
     " `gf` jumps to the filename under the cursor.  Point at an import statement
     " and jump to it!
-    python << EOF
+<<<<<<< HEAD
+    py3  << EOF
+=======
+    python3 << EOF
+>>>>>>> 0d7165422fc972f64871a1e426947bf1c105f02f
 import os
 import sys
 import types
@@ -61,30 +65,40 @@ def python_goto_file():
             else:
                 raise
 
-        for m in cw.split('.')[1:]:
-            nd = getattr(md, m)
-            if type(nd) == types.ModuleType:
+             for m in cw.split('.')[1:]:
+              nd = getattr(md, m)
+              if type(nd) == types.ModuleType:
                 md = nd
-            else:
+                else:
                 break
 
-    except ImportError, e:
-        print >>sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e))
+<<<<<<< HEAD
+              except ImportError as  e:
+              print (sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e)))
+              return
+=======
+    except ImportError as  e:
+        print(sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e)))
         return
+>>>>>>> 0d7165422fc972f64871a1e426947bf1c105f02f
 
     # Convert .pyc and .pyo to .py
     try:
         gf = md.__file__.rstrip('co')
     except AttributeError:
-        print >>sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,)
+<<<<<<< HEAD
+        print (sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,))
+=======
+        print( sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,))
+>>>>>>> 0d7165422fc972f64871a1e426947bf1c105f02f
         return
 
     if os.path.isfile(gf):
         gf = gf.replace(' ', '\\ ')
-        vim.command('split %s' % (gf,))
+        vim.command('vsplit %s' % (gf,))
 
 EOF
-    map gf :python python_goto_file()<cr>
+    map gf :py3 python_goto_file()<cr>
 endif
 
 " vim:ft=vim:fdm=marker
