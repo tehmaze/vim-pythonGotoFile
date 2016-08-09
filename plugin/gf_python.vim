@@ -41,7 +41,11 @@ endif
 if has("python3")
     " `gf` jumps to the filename under the cursor.  Point at an import statement
     " and jump to it!
+<<<<<<< HEAD
     py3  << EOF
+=======
+    python3 << EOF
+>>>>>>> 0d7165422fc972f64871a1e426947bf1c105f02f
 import os
 import sys
 import types
@@ -68,15 +72,25 @@ def python_goto_file():
                 else:
                 break
 
+<<<<<<< HEAD
               except ImportError as  e:
               print (sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e)))
               return
+=======
+    except ImportError as  e:
+        print(sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e)))
+        return
+>>>>>>> 0d7165422fc972f64871a1e426947bf1c105f02f
 
     # Convert .pyc and .pyo to .py
     try:
         gf = md.__file__.rstrip('co')
     except AttributeError:
+<<<<<<< HEAD
         print (sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,))
+=======
+        print( sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,))
+>>>>>>> 0d7165422fc972f64871a1e426947bf1c105f02f
         return
 
     if os.path.isfile(gf):
