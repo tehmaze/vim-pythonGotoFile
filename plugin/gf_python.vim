@@ -41,7 +41,7 @@ endif
 if has("python3")
     " `gf` jumps to the filename under the cursor.  Point at an import statement
     " and jump to it!
-    python << EOF
+    py3  << EOF
 import os
 import sys
 import types
@@ -61,22 +61,22 @@ def python_goto_file():
             else:
                 raise
 
-        for m in cw.split('.')[1:]:
-            nd = getattr(md, m)
-            if type(nd) == types.ModuleType:
+             for m in cw.split('.')[1:]:
+              nd = getattr(md, m)
+              if type(nd) == types.ModuleType:
                 md = nd
-            else:
+                else:
                 break
 
-    except ImportError, e:
-        print >>sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e))
-        return
+              except ImportError as  e:
+              print (sys.stderr, 'E447: Can not goto "%s": %s' % (cw, str(e)))
+              return
 
     # Convert .pyc and .pyo to .py
     try:
         gf = md.__file__.rstrip('co')
     except AttributeError:
-        print >>sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,)
+        print (sys.stderr, 'E210: Can not goto "%s": built-in module' % (cw,))
         return
 
     if os.path.isfile(gf):
@@ -84,7 +84,7 @@ def python_goto_file():
         vim.command('vsplit %s' % (gf,))
 
 EOF
-    map gf :python3 python_goto_file()<cr>
+    map gf :py3 python_goto_file()<cr>
 endif
 
 " vim:ft=vim:fdm=marker
